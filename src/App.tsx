@@ -1,33 +1,54 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [error, setError] = useState<string | null>(null);
+
+  const handleAutoConnectStart = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { action: "startAutoConnect" },
+          (response) => {
+            if (!response) {
+              setError("Error: Auto Connect program failed !!!")
+            }
+          }
+        );
+      }
+    });
+  }
+
+  const handleAutoConnectStop = () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      if (tabs[0]?.id) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          { action: "stopAutoConnect" },
+          (response) => {
+            if (!response) {
+              setError("Error: Failed to STOP Auto Connect, PLEASE RELOAD PAGE!!!")
+            }
+          }
+        );
+      }
+    });
+  }
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+      <h1>LinkedIn Auto Connect Application</h1>
+      <h3 style={{color: "#f00", fontWeight: "700"}}>{error}</h3>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+        <button style={{backgroundColor: "#f00"}} onClick={handleAutoConnectStart}>
+          Start Auto Connect
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+        <br />
+        <button style={{backgroundColor: "#00f"}} onClick={handleAutoConnectStop}>
+          Stop Auto Connect
+        </button>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }
