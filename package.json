@@ -11,6 +11,7 @@
     },
     "dependencies": {
         "@types/chrome": "^0.0.278",
+        "linkedin-auto-connect": "file:../linkedin-auto-connect-extension",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
