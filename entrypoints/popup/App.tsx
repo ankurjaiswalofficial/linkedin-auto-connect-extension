@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import type { AutoConnectState } from '../../types/storage'
-import { DEFAULT_STATE } from '../../types/storage'
+import type { AutoConnectState } from '../types/storage'
+import { DEFAULT_STATE } from '../types/storage'
 import "./App.css";
 
 
