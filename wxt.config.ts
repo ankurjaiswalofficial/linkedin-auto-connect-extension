@@ -1,19 +1,6 @@
-import { defineConfig } from 'wxt'
+import { defineConfig } from 'wxt';
 
+// See https://wxt.dev/api/config.html
 export default defineConfig({
-  manifest: {
-    permissions: [
-      'activeTab',
-      'scripting',
-      'storage'
-    ],
-    host_permissions: [
-      'https://*.linkedin.com/*'
-    ]
-  },
-  vite: (env) => ({
-    build: {
-      target: 'esnext'
-    }
-  })
-})
+  modules: ['@wxt-dev/module-react'],
+});

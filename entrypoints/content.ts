@@ -1,5 +1,4 @@
-import { defineContentScript } from 'wxt/sandbox'
-import { DEFAULT_STATE, type AutoConnectState } from '../types/storage'
+import { DEFAULT_STATE, type AutoConnectState } from './types/storage'
 
 class AutoConnector {
   private async getState(): Promise<AutoConnectState> {
